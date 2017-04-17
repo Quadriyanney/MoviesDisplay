@@ -10,15 +10,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MoviesPopular">
+        <activity android:name=".MoviesPopular"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MoviesDetail" />
-        <activity android:name=".MoviesTop" />
+        <activity android:name=".MoviesDetail"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MoviesTop"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

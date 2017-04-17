@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,9 +104,10 @@ public class MoviesPopular extends AppCompatActivity implements MovieAdapter.Lis
 
         @Override
         protected void onPreExecute() {
-            popularQuery = "http://api.themoviedb.org/3/movie/popular?api_key=612d2e93d23cfe06c40800a63b701412";
+            popularQuery = "http://api.themoviedb.org/3/movie/popular?api_key=<<>>";
             progressDialog.setMessage("Fetching Data...");
             progressDialog.show();
+            progressDialog.setCancelable(false);
         }
 
         @Override
@@ -143,18 +143,19 @@ public class MoviesPopular extends AppCompatActivity implements MovieAdapter.Lis
 
             if (popularJSON == null){
                 progressDialog.dismiss();
-                Snackbar snackbar = Snackbar.make(drawer, "Poor Connection", Snackbar.LENGTH_LONG).setAction(
-                        Refresh, new View.OnClickListener() {
+                Snackbar snackbar = Snackbar.make(drawer, "Poor/No Connection", Snackbar.LENGTH_INDEFINITE).setAction(
+                        "Refresh", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                new MoviesTop.Background().execute();
+                                new Background().execute();
                             }
                         }
-                )
+                );
+                snackbar.show();
             }
             else {
                 try {
-
+                    progressDialog.dismiss();
                     jsonObject = new JSONObject(popularJSON);
                     jsonArray = jsonObject.getJSONArray("results");
 

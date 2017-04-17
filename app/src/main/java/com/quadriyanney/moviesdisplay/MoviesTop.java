@@ -4,19 +4,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,13 +100,14 @@ public class MoviesTop extends AppCompatActivity implements MovieAdapter.ListIte
 
 
     public class Background extends AsyncTask<Void, Void, String> {
-        ProgressDialog progressDialog = new ProgressDialog(GetList.this);
+        ProgressDialog progressDialog = new ProgressDialog(MoviesTop.this);
 
         @Override
         protected void onPreExecute() {
-            top_ratedQuery = "http://api.themoviedb.org/3/movie/top_rated?api_key=612d2e93d23cfe06c40800a63b701412";
+            top_ratedQuery = "http://api.themoviedb.org/3/movie/top_rated?api_key=<<>>";
             progressDialog.setMessage("Fetching Data...");
             progressDialog.show();
+            progressDialog.setCancelable(false);
         }
 
         @Override
@@ -143,18 +143,19 @@ public class MoviesTop extends AppCompatActivity implements MovieAdapter.ListIte
 
             if (top_ratedJSON == null){
                 progressDialog.dismiss();
-                Snackbar snackbar = Snackbar.make(drawer, "Poor Connection", Snackbar.LENGTH_LONG).setAction(
-                        Refresh, new View.OnClickListener() {
+                Snackbar snackbar = Snackbar.make(drawer, "Poor/No Connection", Snackbar.LENGTH_LONG).setAction(
+                        "Refresh", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 new Background().execute();
                             }
                         }
-                )
+                );
+                snackbar.show();
             }
             else {
                 try {
-
+                    progressDialog.dismiss();
                     jsonObject = new JSONObject(top_ratedJSON);
                     jsonArray = jsonObject.getJSONArray("results");
 
