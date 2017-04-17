@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MoviesDisplay</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="top_rated_movies">Top-Rated Movies</string>
+    <string name="release_date">Release Date:</string>
+    <string name="rating">Rating:</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="title">Title:</string>
+</resources>
