@@ -1,4 +1,4 @@
-package com.quadriyanney.moviesdisplay;
+package com.quadriyanney.moviesdisplay.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.quadriyanney.moviesdisplay.data.MoviesInfo;
+import com.quadriyanney.moviesdisplay.R;
 
 import java.util.List;
 
@@ -16,13 +18,11 @@ import java.util.List;
  * Created by quadriy on 4/15/17.
  */
 
-class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder>{
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder>{
 
     private Context context;
     private List<MoviesInfo> movies;
     final private ListItemClickListener mListener;
-
-
 
     public interface ListItemClickListener {
         void onListItemClick(int clicked);
@@ -36,16 +36,15 @@ class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder>{
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-
         holder.title.setText(movies.get(position).getTitle());
-        Glide.with(context).load("http://image.tmdb.org/t/p/w185/" + movies.get(position).getThumbnailUrl()).into(holder.thumbnail);
+        Glide.with(context)
+                .load("http://image.tmdb.org/t/p/w185/" + movies.get(position).getThumbnailUrl()).into(holder.thumbnail);
     }
 
     @Override
@@ -53,8 +52,7 @@ class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder>{
         return movies.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView thumbnail;
         public TextView title;
@@ -68,7 +66,6 @@ class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder>{
 
         @Override
         public void onClick(View view) {
-
             int clicked = getAdapterPosition();
             mListener.onListItemClick(clicked);
         }

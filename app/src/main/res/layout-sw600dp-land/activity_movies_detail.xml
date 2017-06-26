@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    tools:context="com.quadriyanney.moviesdisplay.activities.MoviesDetail"
+    >
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:id="@+id/detail_thumbnail"
+        android:scaleType="fitXY"
+        android:background="@color/black"
+        android:layout_marginRight="@dimen/default_margin"
+        />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="@dimen/default_margin"
+                    >
+                    <TextView
+                        android:text="@string/title"
+                        style="@style/ParamTextView"
+                        android:textSize="30sp"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginStart="@dimen/default_margin"
+                        android:id="@+id/movie_title"
+                        android:textSize="25sp"
+                        style="@style/ValueTextView"
+                        tools:text="uefsdjzbcxjkzldxnblzsdcjklbvsbznjzlkbczjzkncl"
+                        />
+                </LinearLayout>
+
+                <include layout="@layout/separator_line"/>
+
+                <TextView
+                    android:id="@+id/movie_overview"
+                    android:layout_margin="@dimen/overview_dimen"
+                    android:textStyle="italic"
+                    style="@style/ParamTextView"
+                    android:textSize="25sp"
+                    tools:text="kzszbkdbdshbdkjbkadbhdfhkfdsghvdbdsfkbsbalsdhkjfdsbdshjdsajkbdfslndshjasdbsdhbasddshlldslbd"
+                    />
+
+                <include layout="@layout/separator_line"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="@dimen/default_margin"
+                    >
+                    <TextView
+                        android:text="@string/release_date"
+                        style="@style/ParamTextView"
+                        android:textSize="30sp"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/movie_release_date"
+                        style="@style/ValueTextView"
+                        android:textSize="25sp"
+                        tools:text="12-13-2017"
+                        />
+                </LinearLayout>
+
+                <include layout="@layout/separator_line"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="@dimen/default_margin"
+                    >
+                    <TextView
+                        android:text="@string/rating"
+                        style="@style/ParamTextView"
+                        android:textSize="30sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/movie_vote_average"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginStart="@dimen/default_margin"
+                        style="@style/ValueTextView"
+                        tools:text="6/10"
+                        android:textSize="25sp"
+                        />
+                </LinearLayout>
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_favorite"
+                    android:layout_margin="@dimen/default_margin"
+                    android:onClick="OnClicks"
+                    style="?android:attr/starStyle"
+                    android:shadowColor="@color/black"
+                    android:text="@string/mark_as_favorite"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="end"
+                    />
+
+                <include layout="@layout/separator_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/default_margin"
+                    >
+                    <TextView
+                        android:text="@string/mTrailers"
+                        style="@style/ParamTextView"
+                        android:textSize="30sp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/default_margin"
+                        />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/refresh"
+                        android:id="@+id/trailerButton"
+                        android:background="@color/btn_color"
+                        android:onClick="OnClicks"
+                        android:visibility="gone"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/default_margin"
+                        >
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:id="@+id/trailersRecyclerView" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <include layout="@layout/separator_line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/default_margin"
+                    >
+                    <TextView
+                        android:text="@string/review"
+                        android:layout_gravity="center"
+                        android:textSize="30sp"
+                        android:layout_margin="@dimen/default_margin"
+                        style="@style/ParamTextView"
+                        />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/refresh"
+                        android:id="@+id/reviewButton"
+                        android:visibility="gone"
+                        android:background="@color/btn_color"
+                        android:onClick="OnClicks"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/default_margin"
+                        >
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:id="@+id/reviewsRecyclerView" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+    </ScrollView>
+</LinearLayout>

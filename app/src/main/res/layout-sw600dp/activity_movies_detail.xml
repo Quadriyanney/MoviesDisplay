@@ -16,7 +16,7 @@
         >
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="350dp"
             android:id="@+id/detail_thumbnail"
             android:scaleType="fitXY"
             android:layout_marginLeft="@dimen/default_margin"
@@ -34,12 +34,14 @@
             <TextView
                 android:text="@string/title"
                 style="@style/ParamTextView"
+                android:textSize="30sp"
                 />
 
             <TextView
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
                 android:id="@+id/movie_title"
+                android:textSize="25sp"
                 style="@style/ValueTextView"
                 tools:text="uefsdjzbcxjkzldxnblzsdcjklbvsbznjzlkbczjzkncl"
                 />
@@ -52,6 +54,7 @@
             android:layout_margin="@dimen/overview_dimen"
             android:textStyle="italic"
             style="@style/ParamTextView"
+            android:textSize="25sp"
             tools:text="kzszbkdbdshbdkjbkadbhdfhkfdsghvdbdsfkbsbalsdhkjfdsbdshjdsajkbdfslndshjasdbsdhbasddshlldslbd"
             />
 
@@ -66,6 +69,7 @@
             <TextView
                 android:text="@string/release_date"
                 style="@style/ParamTextView"
+                android:textSize="30sp"
                 />
 
             <TextView
@@ -73,6 +77,7 @@
                 android:layout_marginStart="5dp"
                 android:id="@+id/movie_release_date"
                 style="@style/ValueTextView"
+                android:textSize="25sp"
                 tools:text="12-13-2017"
                 />
         </LinearLayout>
@@ -88,6 +93,7 @@
             <TextView
                 android:text="@string/rating"
                 style="@style/ParamTextView"
+                android:textSize="30sp"
                 />
 
             <TextView
@@ -96,6 +102,7 @@
                 android:layout_marginStart="@dimen/default_margin"
                 style="@style/ValueTextView"
                 tools:text="6/10"
+                android:textSize="25sp"
                 />
         </LinearLayout>
 
@@ -108,7 +115,7 @@
             style="?android:attr/starStyle"
             android:shadowColor="@color/black"
             android:text="@string/mark_as_favorite"
-            android:textSize="@dimen/value_text_size"
+            android:textSize="25sp"
             android:textColor="@color/black"
             android:layout_gravity="end"
             />
@@ -124,6 +131,7 @@
             <TextView
                 android:text="@string/mTrailers"
                 style="@style/ParamTextView"
+                android:textSize="30sp"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/default_margin"
                 />
@@ -163,6 +171,7 @@
             <TextView
                 android:text="@string/review"
                 android:layout_gravity="center"
+                android:textSize="30sp"
                 android:layout_margin="@dimen/default_margin"
                 style="@style/ParamTextView"
                 />
@@ -189,7 +198,6 @@
                     android:layout_margin="@dimen/default_margin"
                     android:id="@+id/reviewsRecyclerView" />
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -2,9 +2,19 @@
     <string name="app_name">MoviesDisplay</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="top_rated_movies">Top-Rated Movies</string>
+    <string name="favourite_movies">Favourites</string>
     <string name="release_date">Release Date:</string>
     <string name="rating">Rating:</string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="title">Title:</string>
+    <string name="base_url">api.themoviedb.org</string>
+    <string name="youTubeBaseUrl">https://www.youtube.com/watch?v=</string>
+    <string name="review">Reviews</string>
+    <string name="mTrailers">Trailers</string>
+    <string name="share">Share</string>
+    <string name="imageBaseUrl">http://image.tmdb.org/t/p/w185/</string>
+    <string name="api_key">612d2e93d23cfe06c40800a63b701412</string>
+    <string name="mark_as_favorite">Mark as favorite</string>
+    <string name="refresh">REFRESH</string>
 </resources>

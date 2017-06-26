@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="nav">#e0e0e0</color>
+    <color name="btn_color">#360e0e</color>
 </resources>
