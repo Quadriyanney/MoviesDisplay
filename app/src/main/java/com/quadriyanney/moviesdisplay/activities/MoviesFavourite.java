@@ -64,25 +64,7 @@ public class MoviesFavourite extends AppCompatActivity implements MovieAdapter.L
             adapter.notifyDataSetChanged();
         }
         else {
-            movies_list = new ArrayList<>();
-
-            Cursor cursor = db.query(MovieContract.MovieEntry.TABLE_NAME, null, null, null, null, null, null);
-
-            while (cursor.moveToNext()) {
-                movies_list.add(new MoviesInfo(
-                        cursor.getString(cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_THUMBNAIL)),
-                        cursor.getString(cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_VOTE)),
-                        cursor.getString(cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_OVERVIEW)),
-                        cursor.getString(cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_TITLE)),
-                        cursor.getString(cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_DATE)),
-                        cursor.getString(cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_ID)))
-                );
-            }
-            cursor.close();
-
-            adapter = new MovieAdapter(this, movies_list, this);
-            recyclerView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+           getCurrentDB();
         }
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
@@ -136,10 +118,15 @@ public class MoviesFavourite extends AppCompatActivity implements MovieAdapter.L
     @Override
     public void onRestart() {
         super.onRestart();
+        getCurrentDB();
+    }
+
+    public void getCurrentDB(){
         movies_list = new ArrayList<>();
 
-        Cursor cursor = db.query(MovieContract.MovieEntry.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI, null, null, null, null);
 
+        assert cursor != null;
         while (cursor.moveToNext()) {
             movies_list.add(new MoviesInfo(
                     cursor.getString(cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_THUMBNAIL)),

@@ -21,5 +21,10 @@
         <activity android:name=".activities.MoviesDetail" />
         <activity android:name=".activities.MoviesTop" />
         <activity android:name=".activities.MoviesFavourite" />
+
+        <provider
+            android:authorities="com.quadriyanney.moviesdisplay"
+            android:name="com.quadriyanney.moviesdisplay.data.MovieProvider"
+            android:exported="false"/>
     </application>
 </manifest>

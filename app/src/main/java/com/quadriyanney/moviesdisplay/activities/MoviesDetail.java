@@ -24,7 +24,6 @@ import com.quadriyanney.moviesdisplay.Controller;
 import com.quadriyanney.moviesdisplay.R;
 import com.quadriyanney.moviesdisplay.adapters.ReviewsAdapter;
 import com.quadriyanney.moviesdisplay.adapters.TrailersAdapter;
-import com.quadriyanney.moviesdisplay.data.DatabaseManager;
 import com.quadriyanney.moviesdisplay.data.MovieContract;
 import com.quadriyanney.moviesdisplay.data.ReviewsInfo;
 
@@ -44,7 +43,6 @@ public class MoviesDetail extends AppCompatActivity implements TrailersAdapter.L
     JSONArray jsonArray1, jsonArray2;
     ReviewsAdapter reviewsAdapter;
     TrailersAdapter trailersAdapter;
-    private SQLiteDatabase db;
     Cursor cursor;
     CheckBox favButton;
     Button trailerButton, reviewButton, shareButton;
@@ -111,10 +109,9 @@ public class MoviesDetail extends AppCompatActivity implements TrailersAdapter.L
         getReviews();
         getTrailers();
 
-        DatabaseManager databaseManager = new DatabaseManager(this);
-        db = databaseManager.getWritableDatabase();
-        cursor = db.rawQuery("select " + MovieContract.MovieEntry._ID + " from "+ MovieContract.MovieEntry.TABLE_NAME +" WHERE "
-                + MovieContract.MovieEntry.COLUMN_ID + "=" + movie_id,null);
+        cursor = getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI.buildUpon().appendPath(movie_id).build(),
+                null, null, null, null);
+        assert cursor != null;
         if (cursor.getCount() > 0){
             favButton.setChecked(true);
         }
@@ -141,7 +138,9 @@ public class MoviesDetail extends AppCompatActivity implements TrailersAdapter.L
                 Toast.makeText(getBaseContext(), "Added as favourite", Toast.LENGTH_SHORT).show();
             }
             else {
-                db.delete(MovieContract.MovieEntry.TABLE_NAME, MovieContract.MovieEntry.COLUMN_ID + "=" + movie_id, null);
+                getContentResolver().delete(MovieContract.MovieEntry.CONTENT_URI.buildUpon().appendPath(movie_id).build(),
+                        null,
+                        null);
                 Toast.makeText(getBaseContext(), "Removed from favourite", Toast.LENGTH_SHORT).show();
             }
         }
@@ -157,7 +156,7 @@ public class MoviesDetail extends AppCompatActivity implements TrailersAdapter.L
         }
     }
 
-    private long addAsFavorite(String thumbnail, String title, String overview, String releaseDate, String voteAverage, String movieId){
+    private void addAsFavorite(String thumbnail, String title, String overview, String releaseDate, String voteAverage, String movieId){
         ContentValues contentValues = new ContentValues();
         contentValues.put(MovieContract.MovieEntry.COLUMN_THUMBNAIL, thumbnail);
         contentValues.put(MovieContract.MovieEntry.COLUMN_TITLE, title);
@@ -166,7 +165,7 @@ public class MoviesDetail extends AppCompatActivity implements TrailersAdapter.L
         contentValues.put(MovieContract.MovieEntry.COLUMN_VOTE, voteAverage);
         contentValues.put(MovieContract.MovieEntry.COLUMN_ID, movieId);
 
-        return db.insert(MovieContract.MovieEntry.TABLE_NAME, null, contentValues);
+        getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, contentValues);
     }
 
     @Override

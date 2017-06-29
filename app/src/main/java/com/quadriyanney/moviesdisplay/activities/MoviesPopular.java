@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,7 +25,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.quadriyanney.moviesdisplay.Controller;
 import com.quadriyanney.moviesdisplay.R;
 import com.quadriyanney.moviesdisplay.adapters.MovieAdapter;
-import com.quadriyanney.moviesdisplay.data.DatabaseManager;
 import com.quadriyanney.moviesdisplay.data.MovieContract;
 import com.quadriyanney.moviesdisplay.data.MoviesInfo;
 
@@ -47,7 +45,6 @@ public class MoviesPopular extends AppCompatActivity implements MovieAdapter.Lis
     DrawerLayout drawer;
     ActionBarDrawerToggle drawerToggle;
     NavigationView navDrawer;
-    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +52,6 @@ public class MoviesPopular extends AppCompatActivity implements MovieAdapter.Lis
         setContentView(R.layout.activity_movies_popular);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.popularRecycler);
-
-        DatabaseManager databaseManager = new DatabaseManager(this);
-        db = databaseManager.getWritableDatabase();
 
         toolbar = (Toolbar) findViewById(R.id.popular_toolbar);
         toolbar.setTitle(getResources().getString(R.string.popular_movies));
@@ -122,8 +116,9 @@ public class MoviesPopular extends AppCompatActivity implements MovieAdapter.Lis
             startActivity(i);
         }
         else if (item.getItemId() == R.id.favourite){
-            Cursor cursor = db.query(MovieContract.MovieEntry.TABLE_NAME, null, null, null, null, null, null);
+            Cursor cursor = getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI, null, null, null, null);
 
+            assert cursor != null;
             if (cursor.getCount() > 0){
                 cursor.close();
                 Intent i = new Intent(MoviesPopular.this, MoviesFavourite.class);

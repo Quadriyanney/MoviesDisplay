@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,7 +25,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.quadriyanney.moviesdisplay.Controller;
 import com.quadriyanney.moviesdisplay.R;
 import com.quadriyanney.moviesdisplay.adapters.MovieAdapter;
-import com.quadriyanney.moviesdisplay.data.DatabaseManager;
 import com.quadriyanney.moviesdisplay.data.MovieContract;
 import com.quadriyanney.moviesdisplay.data.MoviesInfo;
 
@@ -47,15 +45,11 @@ public class MoviesTop extends AppCompatActivity implements MovieAdapter.ListIte
     DrawerLayout drawer;
     ActionBarDrawerToggle drawerToggle;
     NavigationView navDrawer;
-    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_top);
-
-        DatabaseManager databaseManager = new DatabaseManager(this);
-        db = databaseManager.getWritableDatabase();
 
         toolbar = (Toolbar) findViewById(R.id.favourite_toolbar);
         toolbar.setTitle(getResources().getString(R.string.top_rated_movies));
@@ -122,8 +116,10 @@ public class MoviesTop extends AppCompatActivity implements MovieAdapter.ListIte
             startActivity(i);
         }
         else if (item.getItemId() == R.id.favourite){
-            Cursor cursor = db.query(MovieContract.MovieEntry.TABLE_NAME, null, null, null, null, null, null);
 
+            Cursor cursor = getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI, null, null, null, null);
+
+            assert cursor != null;
             if (cursor.getCount() > 0){
                 cursor.close();
                 Intent i = new Intent(MoviesTop.this, MoviesFavourite.class);
