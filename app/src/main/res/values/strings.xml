@@ -14,7 +14,7 @@
     <string name="mTrailers">Trailers</string>
     <string name="share">Share</string>
     <string name="imageBaseUrl">http://image.tmdb.org/t/p/w185/</string>
-    <string name="api_key">612d2e93d23cfe06c40800a63b701412</string>
+    <string name="api_key">Put your api-key here</string>
     <string name="mark_as_favorite">Mark as favorite</string>
     <string name="refresh">REFRESH</string>
 </resources>
